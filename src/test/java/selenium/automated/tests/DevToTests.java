@@ -10,6 +10,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import selenium.automated.pageObjects.DevToMainPage;
+import selenium.automated.pageObjects.PostPage;
+import selenium.automated.pageObjects.WeekPage;
 
 import java.util.concurrent.TimeUnit;
 
@@ -78,4 +81,14 @@ public class DevToTests {
 
         assertEquals("url isn't the same as link(href) value", linkToFirstPost, currentUrl);
     }
+    @Test
+    public void OpenDevToObject(){
+        DevToMainPage devToMainPage = new DevToMainPage(driver);
+        WeekPage weekPage = devToMainPage.GoToWeek();
+        PostPage postPage = weekPage.GoToFirstPostPage();
+        boolean isMainTitleVisible = postPage.isMainTitleVisible();
+
+        assertTrue("main title isn't visible",isMainTitleVisible);
+    }
+
 }
